@@ -3,10 +3,13 @@ import { useEffect } from 'react';
 import { Grid, useMediaQuery } from '@mui/material';
 import Head from 'next/head';
 
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AppDisabled from '@/components/AppDisabled';
 import Loader from '@/components/Loader';
+
+import ROUTES from '@/constants/routes';
 
 import SideMenu from './SideMenu';
 import styles from './styles';
@@ -28,6 +31,7 @@ const MainAppLayout = (props) => {
 
   const auth = useSelector((state) => state.auth);
   const user = useSelector((state) => state.user);
+  const router = useRouter();
 
   const isTabletScreen = useMediaQuery((theme) =>
     theme.breakpoints.down('laptop')
@@ -49,10 +53,14 @@ const MainAppLayout = (props) => {
     );
   };
 
+  function showSideMenu() {
+    return router.pathname !== ROUTES.FOUR_0_FOUR;
+  }
+
   const renderApp = () => {
     return (
       <>
-        <SideMenu />
+        {showSideMenu() && <SideMenu />}
         <Grid {...styles.contentGridProps(extraContentProps, isToolPage)}>
           {children}
         </Grid>
