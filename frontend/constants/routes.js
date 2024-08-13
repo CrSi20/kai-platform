@@ -9,6 +9,7 @@ const ROUTES = {
   REDIRECT: '/redirect',
   CHAT: '/chat',
   HISTORY: '/history',
+  FOUR_0_FOUR: '/404',
 };
 
 export default ROUTES;
